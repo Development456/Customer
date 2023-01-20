@@ -1,4 +1,5 @@
 com\miracle\customer\repository\CustomerRepository.class
+com\miracle\customer\config\ConfigurationDetails.class
 com\miracle\customer\micrometer\MicrometerConfiguration.class
 com\miracle\customer\service\CustomerService.class
 com\miracle\customer\CustomerApplication.class
