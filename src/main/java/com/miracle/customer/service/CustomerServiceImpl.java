@@ -35,6 +35,7 @@ public class CustomerServiceImpl implements CustomerService{
 	@Autowired
 	RestTemplate restTemplate;
 	
+	
 	private Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 	
 	public ResponseEntity<List<?>> getAllCustomersBreaker(Customer customer){
