@@ -1,3 +1,7 @@
+/*******
+* Copyright (C) 2023 Claims Application-Miracle Software Systems Inc
+* All Rights Reserved.
+*******/
 package com.miracle.customer.controller;
 
 import java.util.List;
@@ -24,6 +28,7 @@ import com.miracle.customer.exception.ErrorDetails;
 import com.miracle.customer.model.Customer;
 import com.miracle.customer.service.CustomerServiceImpl;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -62,6 +67,38 @@ public class CustomerController {
 	public ResponseEntity<List<Customer>> getAllCustomers() {
 		return customerServices.getAllCustomers();
 	}
+	
+	
+	
+	@Timed(
+			value = "customer.getAll.connection",
+			histogram = true,
+			percentiles = {0.95, 0.99},
+			extraTags = {"version", "1.0"}
+			)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(value = "Returns All Customer details", notes = "JSON Supported", response = Customer.class)
+	@ApiResponses({ @ApiResponse(code = 200, message = "success", response = Customer.class),
+			@ApiResponse(code = 400, message = "bad-request", response = ErrorDetails.class),
+			@ApiResponse(code = 401, message = "Unauthorized", response = ErrorDetails.class),
+			@ApiResponse(code = 403, message = "Customers service requires authentication - please check username and password", response = ErrorDetails.class),
+			@ApiResponse(code = 404, message = "Data not found", response = ErrorDetails.class),
+			@ApiResponse(code = 405, message = "Method not allowed", response = ErrorDetails.class),
+			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
+	@GetMapping("/customers/connection")
+	@CircuitBreaker(name = "customerBreaker", fallbackMethod = "getFallback")
+	public ResponseEntity<List<?>> getAllCustomers(@RequestBody Customer customer) {
+		return customerServices.getAllCustomersConnection(customer);
+	}
+	//http://localhost:8400/customers/connection
+	
+	public ResponseEntity<List<?>> getFallback(@RequestBody Customer customer, Exception ex){
+		System.out.println("The service is down");
+		return customerServices.getAllCustomersBreaker(customer);
+	}
+	
+	
 	
 	
 	//filter
