@@ -1,10 +1,10 @@
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\model\Customer.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\service\CustomerService.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\controller\CustomerController.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\model\Facility.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\exception\ErrorDetails.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\repository\CustomerRepository.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\config\MyConfig.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\CustomerApplication.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\micrometer\MicrometerConfiguration.java
-C:\Americodl\ClaimsAPI\Customer\src\main\java\com\miracle\customer\service\CustomerServiceImpl.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/config/MyConfig.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/service/CustomerServiceImpl.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/model/Facility.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/model/Customer.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/controller/CustomerController.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/micrometer/MicrometerConfiguration.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/exception/ErrorDetails.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/service/CustomerService.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/repository/CustomerRepository.java
+/Users/alakshenderkumar/Downloads/Alakshender new Claims/Customer/Customer/src/main/java/com/miracle/customer/CustomerApplication.java
