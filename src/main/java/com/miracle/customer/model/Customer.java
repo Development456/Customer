@@ -1,7 +1,3 @@
-/*******
-* Copyright (C) 2023 Claims Application-Miracle Software Systems Inc
-* All Rights Reserved.
-*******/
 package com.miracle.customer.model;
 
 import org.springframework.data.annotation.Id;
@@ -88,10 +84,6 @@ private String _id;
 	@ApiModelProperty(required = true, value = "lastUpdateDate", name = "lastUpdateDate", dataType = "String", example = "")
 	@Field("last_update_date")
 	private String lastUpdateDate;
-	
-	@ApiModelProperty(required = true, value = "facilityId", name = "facilityId", dataType = "String", example = "")
-	@Field("facility_id")
-	private String facilityId;
 
 	@Override
 	public String toString() {
@@ -99,6 +91,6 @@ private String _id;
 				+ addressLine1 + ", addressLine2=" + addressLine2 + ", addressLine3=" + addressLine3 + ", city=" + city
 				+ ", state=" + state + ", postalCode=" + postalCode + ", country=" + country + ", phone=" + phone
 				+ ", fax=" + fax + ", email=" + email + ", creatorId=" + creatorId + ", lastUpdatorId=" + lastUpdatorId
-				+ ", createDate=" + createDate + ", lastUpdateDate=" + lastUpdateDate + ",facilityId=" + facilityId +"]";
+				+ ", createDate=" + createDate + ", lastUpdateDate=" + lastUpdateDate + "]";
 	}
 }

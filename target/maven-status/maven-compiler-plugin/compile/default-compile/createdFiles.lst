@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 com\miracle\customer\repository\CustomerRepository.class
 com\miracle\customer\config\ConfigurationDetails.class
 com\miracle\customer\micrometer\MicrometerConfiguration.class
@@ -9,16 +8,3 @@ com\miracle\customer\exception\ErrorDetails.class
 com\miracle\customer\service\CustomerServiceImpl.class
 com\miracle\customer\model\Customer.class
 META-INF\spring-configuration-metadata.json
-=======
-com/miracle/customer/model/Facility.class
-META-INF/spring-configuration-metadata.json
-com/miracle/customer/config/MyConfig.class
-com/miracle/customer/service/CustomerService.class
-com/miracle/customer/model/Customer.class
-com/miracle/customer/repository/CustomerRepository.class
-com/miracle/customer/controller/CustomerController.class
-com/miracle/customer/micrometer/MicrometerConfiguration.class
-com/miracle/customer/exception/ErrorDetails.class
-com/miracle/customer/CustomerApplication.class
-com/miracle/customer/service/CustomerServiceImpl.class
->>>>>>> develop

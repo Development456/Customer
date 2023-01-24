@@ -1,7 +1,3 @@
-/*******
-* Copyright (C) 2023 Claims Application-Miracle Software Systems Inc
-* All Rights Reserved.
-*******/
 package com.miracle.customer;
 
 import org.springframework.boot.SpringApplication;

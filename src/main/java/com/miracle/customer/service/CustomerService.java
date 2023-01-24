@@ -1,7 +1,3 @@
-/*******
-* Copyright (C) 2023 Claims Application-Miracle Software Systems Inc
-* All Rights Reserved.
-*******/
 package com.miracle.customer.service;
 
 import java.util.List;
@@ -12,9 +8,6 @@ import com.miracle.customer.model.Customer;
 
 
 public interface CustomerService {
-	
-	public ResponseEntity<List<?>> getAllCustomersConnection(Customer customer);
-
 	
 	public ResponseEntity<List<Customer>> getAllCustomers();
 	public ResponseEntity<List<Customer>> getAllCustomerFilter(Customer customer, int page, int size, String sort);

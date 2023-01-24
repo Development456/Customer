@@ -1,14 +1,8 @@
-/*******
-* Copyright (C) 2023 Claims Application-Miracle Software Systems Inc
-* All Rights Reserved.
-*******/
 package com.miracle.customer.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +13,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.miracle.customer.model.Customer;
 import com.miracle.customer.repository.CustomerRepository;
@@ -31,35 +24,12 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	MongoOperations mongoOperations;
-	
-	@Autowired
-	RestTemplate restTemplate;
-	
-	
-	private Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
-	
-	public ResponseEntity<List<?>> getAllCustomersBreaker(Customer customer){
-		List<?> al = new ArrayList<>();
-		//return empty list
-		return new ResponseEntity<List<?>>(al, new HttpHeaders(), HttpStatus.OK);
-	}
-	
-	@Override
-	public ResponseEntity<List<?>> getAllCustomersConnection(Customer customer) {
-		
-		List<?> al = restTemplate.getForObject("http://localhost:8200/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
-		logger.info("{} ", al);
-		
-		return new ResponseEntity<List<?>>(al, new HttpHeaders(), HttpStatus.OK);
-	}
-	
-	
+	 
 	@Override
 	public ResponseEntity<List<Customer>> getAllCustomers() {
 		List<Customer> list = customerRepository.findAll();
 		return new ResponseEntity<List<Customer>>(list, new HttpHeaders(), HttpStatus.OK);
 	}
-
 	
 	//filter for customer
 	@Override
