@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public ResponseEntity<List<?>> getAllCustomersConnection(Customer customer) {
 		
-		List<?> al = restTemplate.getForObject("http://localhost:8200/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
+		List<?> al = restTemplate.getForObject("http://172.174.113.233:9001/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
 		logger.info("{} ", al);
 		
 		return new ResponseEntity<List<?>>(al, new HttpHeaders(), HttpStatus.OK);
