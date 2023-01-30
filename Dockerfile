@@ -1,5 +1,7 @@
 FROM openjdk:11-jdk
 
+LABEL maintainer = "Apurva Bansode"
+
 COPY target/customer-0.0.1-SNAPSHOT.jar /app/api.jar
 COPY src/main/resources/application.properties /app/config/application.properties
 
