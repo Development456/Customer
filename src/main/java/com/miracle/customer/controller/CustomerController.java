@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.miracle.customer.exception.ErrorDetails;
+import com.miracle.claims.beans.Claim;
 import com.miracle.customer.model.Customer;
 import com.miracle.customer.service.CustomerServiceImpl;
 
@@ -295,4 +296,12 @@ public class CustomerController {
 		return customerServices.deleteCustomer(customerId);
 	}
 	
+	//function for Kafka messaging
+	@PostMapping("/message")
+	public String addClaim(@RequestBody Claim claim) {
+		System.out.println("claims from controller"+claim);
+		customerServices.sendMessage(claim);
+		return "The claim has been sent";
+	}
+
 }
