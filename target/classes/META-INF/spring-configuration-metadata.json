@@ -1,15 +1,31 @@
 {
-  "groups": [],
+  "groups": [
+    {
+      "name": "customer",
+      "type": "com.miracle.customer.config.ConfigurationDetails",
+      "sourceType": "com.miracle.customer.config.ConfigurationDetails"
+    }
+  ],
   "properties": [
     {
-      "name": "eureka.client.instance.preferIpAddress",
+      "name": "customer.database",
       "type": "java.lang.String",
-      "description": "A description for 'eureka.client.instance.preferIpAddress'"
+      "sourceType": "com.miracle.customer.config.ConfigurationDetails"
     },
     {
-      "name": "management.security.enabled",
+      "name": "customer.host",
       "type": "java.lang.String",
-      "description": "A description for 'management.security.enabled'"
+      "sourceType": "com.miracle.customer.config.ConfigurationDetails"
+    },
+    {
+      "name": "customer.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.miracle.customer.config.ConfigurationDetails"
+    },
+    {
+      "name": "customer.value",
+      "type": "java.lang.String",
+      "sourceType": "com.miracle.customer.config.ConfigurationDetails"
     }
   ],
   "hints": []
