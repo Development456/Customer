@@ -24,7 +24,33 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	MongoOperations mongoOperations;
+<<<<<<< HEAD
 	 
+=======
+	
+	@Autowired
+	RestTemplate restTemplate;
+	
+	
+	private Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+	
+	public ResponseEntity<List<?>> getAllCustomersBreaker(Customer customer){
+		List<?> al = new ArrayList<>();
+		//return empty list
+		return new ResponseEntity<List<?>>(al, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	@Override
+	public ResponseEntity<List<?>> getAllCustomersConnection(Customer customer) {
+		
+		List<?> al = restTemplate.getForObject("http://172.174.113.233:9001/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
+		logger.info("{} ", al);
+		
+		return new ResponseEntity<List<?>>(al, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	
+>>>>>>> c7b3acd0d5534d87b8fed496754908222343a0d0
 	@Override
 	public ResponseEntity<List<Customer>> getAllCustomers() {
 		List<Customer> list = customerRepository.findAll();

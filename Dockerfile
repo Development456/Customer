@@ -1,4 +1,10 @@
-FROM openjdk:11
-VOLUME /tmp
-ADD target/customer-0.0.1-SNAPSHOT.jar customer-docker.jar
-ENTRYPOINT ["java", "-jar", "customer-docker.jar"]
+FROM openjdk:11-jdk
+
+LABEL maintainer = "Apurva Bansode"
+
+COPY target/customer-0.0.1-SNAPSHOT.jar /app/api.jar
+COPY src/main/resources/application.properties /app/config/application.properties
+
+EXPOSE 9002
+
+ENTRYPOINT ["java", "-jar", "-Dspring.config.import=optional:configserver:http://20.62.171.46:8888", "-Dspring.config.name=application", "-Dspring.config.location=file:/app/config/", "/app/api.jar"]

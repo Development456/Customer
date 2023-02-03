@@ -15,6 +15,7 @@ public interface CustomerService {
 	public String deleteCustomer(Long customerId);
 	public ResponseEntity<Customer> updateCustomer(Long CustomerId, Customer customer);
 	public Customer getByCustomerId(Long customerId);
+	ResponseEntity<List<?>> getAllCustomersConnection(Customer customer);
 
 
 }
