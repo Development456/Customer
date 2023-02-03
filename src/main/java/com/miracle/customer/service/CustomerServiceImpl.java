@@ -7,6 +7,7 @@ package com.miracle.customer.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,17 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.miracle.claims.beans.Claim;
 import com.miracle.customer.model.Customer;
 import com.miracle.customer.repository.CustomerRepository;
+
 @Service
 public class CustomerServiceImpl implements CustomerService{
 	
@@ -34,6 +41,18 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	RestTemplate restTemplate;
+	
+	@Autowired
+	NewTopic newTopic;
+	
+	//Kafka template
+	private KafkaTemplate<String, Claim> kafkaTemplate;
+	
+	
+	
+	public CustomerServiceImpl(KafkaTemplate<String, Claim> kafkaTemplate) {
+		this.kafkaTemplate = kafkaTemplate;
+	}
 	
 	
 	private Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
@@ -47,7 +66,8 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public ResponseEntity<List<?>> getAllCustomersConnection(Customer customer) {
 		
-		List<?> al = restTemplate.getForObject("http://172.174.113.233:9001/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
+		//List<?> al = restTemplate.getForObject("http://172.174.113.233:9001/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
+		List<?> al = restTemplate.getForObject("http://localhost:8200/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
 		logger.info("{} ", al);
 		
 		return new ResponseEntity<List<?>>(al, new HttpHeaders(), HttpStatus.OK);
@@ -128,6 +148,21 @@ public class CustomerServiceImpl implements CustomerService{
 		return new ResponseEntity<List<Customer>>(filteredVals, new HttpHeaders(), HttpStatus.OK);
 	}
 
+	//Method for Kafka
+	public void sendMessage(Claim claim) {
+		System.out.println("claim from service="+claim.toString());
+		//create message
+		Message<Claim> message = MessageBuilder
+				.withPayload(claim)
+				.setHeader(KafkaHeaders.TOPIC, newTopic.name())
+				.build();
+		System.out.println("this is service message" +message.toString());
+		kafkaTemplate.send(message);
+		
+	}
+	
+	
+	
 	
 	
 	
