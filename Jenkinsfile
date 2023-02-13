@@ -1,7 +1,7 @@
 node {
       stage("Git Clone"){
 
-        git branch: 'main', url: 'https://https://github.com/Development456/Customer.git'
+        git branch: 'main', url: 'https://github.com/Development456/Customer.git'
       }
 	stage('Build Project'){
 sh "mvn clean package"
