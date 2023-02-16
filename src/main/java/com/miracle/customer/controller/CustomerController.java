@@ -1,34 +1,22 @@
 package com.miracle.customer.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.miracle.customer.exception.ErrorDetails;
 import com.miracle.customer.model.Customer;
 import com.miracle.customer.service.CustomerServiceImpl;
-
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -223,7 +211,7 @@ public class CustomerController {
 			@ApiResponse(code = 404, message = "Data not found", response = ErrorDetails.class),
 			@ApiResponse(code = 405, message = "Method not allowed", response = ErrorDetails.class),
 			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
-	@PutMapping("/Customers/{CustomerId}")
+	@PutMapping("/customers/{customerId}")
 	public ResponseEntity<Customer> updateCustomer(
 			@ApiParam(value = "Customer Id", required = true) @PathVariable Long CustomerId,
 			@ApiParam(value = "Customer Request", required = true) @RequestBody Customer Customer) {
@@ -257,5 +245,32 @@ public class CustomerController {
 			@ApiParam(value = "Customer Id", required = true) @PathVariable Long customerId) {
 		return customerServices.deleteCustomer(customerId);
 	}
-	
+
+/**
+ * Gets count of all customers.
+ *
+ * @returns all customers count
+ */
+	@Timed(
+			value = "com.miracle.customer.getAll",
+			histogram = true,
+			percentiles = {0.95, 0.99},
+			extraTags = {"version", "1.0"}
+	)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	@ApiOperation(value = "Returns count of all customers", notes = "JSON Supported", response = Customer.class)
+	@ApiResponses({ @ApiResponse(code = 200, message = "success", response = Customer.class),
+			@ApiResponse(code = 400, message = "bad-request", response = ErrorDetails.class),
+			@ApiResponse(code = 401, message = "Unauthorized", response = ErrorDetails.class),
+			@ApiResponse(code = 403, message = "Customers service requires authentication - please check username and password", response = ErrorDetails.class),
+			@ApiResponse(code = 404, message = "Data not found", response = ErrorDetails.class),
+			@ApiResponse(code = 405, message = "Method not allowed", response = ErrorDetails.class),
+			@ApiResponse(code = 500, message = "Internal server error", response = ErrorDetails.class) })
+	@GetMapping("/customer/count")
+	public int totalCustomerCount() {
+		return customerServices.totalCustomerCount();
+	}
+
+
 }
