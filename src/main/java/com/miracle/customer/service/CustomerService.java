@@ -1,9 +1,10 @@
 package com.miracle.customer.service;
 
-import com.miracle.customer.model.Customer;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
+import com.miracle.customer.model.Customer;
 
 
 public interface CustomerService {
@@ -15,7 +16,6 @@ public interface CustomerService {
 	public ResponseEntity<Customer> updateCustomer(Long CustomerId, Customer customer);
 	public Customer getByCustomerId(Long customerId);
 	ResponseEntity<List<?>> getAllCustomersConnection(Customer customer);
-	public int totalCustomerCount();
 
 
 }
