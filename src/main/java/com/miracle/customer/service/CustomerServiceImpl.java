@@ -3,6 +3,8 @@ package com.miracle.customer.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import com.miracle.customer.model.Customer;
 import com.miracle.customer.repository.CustomerRepository;
+import org.springframework.web.client.RestTemplate;
+
 @Service
 public class CustomerServiceImpl implements CustomerService{
 	
@@ -24,9 +28,7 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	MongoOperations mongoOperations;
-<<<<<<< HEAD
-	 
-=======
+
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -48,9 +50,8 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		return new ResponseEntity<List<?>>(al, new HttpHeaders(), HttpStatus.OK);
 	}
-	
-	
->>>>>>> c7b3acd0d5534d87b8fed496754908222343a0d0
+
+
 	@Override
 	public ResponseEntity<List<Customer>> getAllCustomers() {
 		List<Customer> list = customerRepository.findAll();
