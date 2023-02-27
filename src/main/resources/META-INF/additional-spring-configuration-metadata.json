@@ -10,43 +10,43 @@
     "description": "A description for 'management.security.enabled'"
   },
   {
-    "name": "spring.kafka.topic.name",
+    "name": "eureka.client.instance.preferIpAddress",
     "type": "java.lang.String",
-    "description": "A description for 'spring.kafka.topic.name'"
+    "description": "A description for 'eureka.client.instance.preferIpAddress'"
   },
   {
-    "name": "management.security.enabled",
+    "name": "eureka.client.instance.preferIpAddress",
     "type": "java.lang.String",
-    "description": "A description for 'management.security.enabled'"
+    "description": "A description for 'eureka.client.instance.preferIpAddress'"
   },
   {
-    "name": "spring.kafka.topic.name",
+    "name": "eureka.client.instance.preferIpAddress",
     "type": "java.lang.String",
-    "description": "A description for 'spring.kafka.topic.name'"
+    "description": "A description for 'eureka.client.instance.preferIpAddress'"
   },
   {
-    "name": "spring.kafka.topic.name",
+    "name": "eureka.client.instance.preferIpAddress",
     "type": "java.lang.String",
-    "description": "A description for 'spring.kafka.topic.name'"
+    "description": "A description for 'eureka.client.instance.preferIpAddress'"
   },
   {
-    "name": "spring.kafka.topic.name",
+    "name": "eureka.client.instance.preferIpAddress",
     "type": "java.lang.String",
-    "description": "A description for 'spring.kafka.topic.name'"
+    "description": "A description for 'eureka.client.instance.preferIpAddress'"
   },
   {
-    "name": "spring.kafka.topic.name",
+    "name": "eureka.client.instance.preferIpAddress",
     "type": "java.lang.String",
-    "description": "A description for 'spring.kafka.topic.name'"
+    "description": "A description for 'eureka.client.instance.preferIpAddress'"
   },
   {
-    "name": "spring.kafka.topic.name",
+    "name": "eureka.client.instance.preferIpAddress",
     "type": "java.lang.String",
-    "description": "A description for 'spring.kafka.topic.name'"
+    "description": "A description for 'eureka.client.instance.preferIpAddress'"
   },
   {
-    "name": "spring.kafka.topic.name",
+    "name": "eureka.client.instance.preferIpAddress",
     "type": "java.lang.String",
-    "description": "A description for 'spring.kafka.topic.name'"
+    "description": "A description for 'eureka.client.instance.preferIpAddress'"
   }
 ]}

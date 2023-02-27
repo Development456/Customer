@@ -4,8 +4,10 @@
 *******/
 package com.miracle.customer.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -25,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.miracle.customer.exception.ErrorDetails;
-import com.miracle.claims.beans.Claim;
 import com.miracle.customer.model.Customer;
 import com.miracle.customer.service.CustomerServiceImpl;
 
@@ -42,6 +43,13 @@ public class CustomerController {
 	/** The customer services. */
 	@Autowired
 	private CustomerServiceImpl customerServices;
+	
+	//customerIdList
+	//list of all customer from customer id
+	@PostMapping("/customerlistfromid/")
+	public List<String> getCustomerListFromId(@RequestBody List<String> customerIdList){
+		return customerServices.getCustomerListFromId(customerIdList);
+	}
 	
 	/**
 	 * Gets all customers.
@@ -296,12 +304,4 @@ public class CustomerController {
 		return customerServices.deleteCustomer(customerId);
 	}
 	
-	//function for Kafka messaging
-	@PostMapping("/message")
-	public String addClaim(@RequestBody Claim claim) {
-		System.out.println("claims from controller"+claim);
-		customerServices.sendMessage(claim);
-		return "The claim has been sent";
-	}
-
 }

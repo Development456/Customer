@@ -7,7 +7,6 @@ package com.miracle.customer.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +18,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.miracle.claims.beans.Claim;
 import com.miracle.customer.model.Customer;
 import com.miracle.customer.repository.CustomerRepository;
-
 @Service
 public class CustomerServiceImpl implements CustomerService{
 	
@@ -42,20 +35,50 @@ public class CustomerServiceImpl implements CustomerService{
 	@Autowired
 	RestTemplate restTemplate;
 	
-	@Autowired
-	NewTopic newTopic;
-	
-	//Kafka template
-	private KafkaTemplate<String, Claim> kafkaTemplate;
-	
-	
-	
-	public CustomerServiceImpl(KafkaTemplate<String, Claim> kafkaTemplate) {
-		this.kafkaTemplate = kafkaTemplate;
-	}
-	
 	
 	private Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+	
+	
+	
+	
+	public List<String> getCustomerListFromId(List<String> customerIdList){
+		Query query = new Query();
+		List<Criteria> criteria = new ArrayList<>();
+		for(String s :customerIdList) {
+			criteria.add(Criteria.where("customer_id").is(s));
+		}
+		query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));
+		List<Customer> customerList = mongoOperations.find(query, Customer.class);
+		List<String> customerName = new ArrayList<>() ;
+		for(Customer c: customerList) {
+			customerName.add(c.getName());
+		}
+		
+		return customerName;
+	}
+	//get customer list filtered
+//	public List<String> getCustomerFilteredList(String year, String facility, String customer){
+//		Query query = new Query();
+//		List<Criteria> criteria = new ArrayList<>();
+//		String yrL = String.format("%s-01-01",year);
+//		String yrG = String.format("%s-12-31",year);
+//		if(year != null) {
+//			criteria.add(Criteria.where("create_date").gt(yrL).lt(yrG));
+//		}
+//		if(facility !=null) {
+//			criteria.add(Criteria.where("facility_id").is(facility));
+//		}
+//		if(customer != null) {
+//			criteria.add(Criteria.where("customer_id").is(customer));
+//		}
+//		query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));
+//		List<String> fList = new ArrayList<String>();
+//		List<Customer> customerList = mongoOperations.find(query, Customer.class);
+//		for(Customer c:customerList) {
+//			fList.add(c.getName());
+//		}
+//		return fList;
+//	}
 	
 	public ResponseEntity<List<?>> getAllCustomersBreaker(Customer customer){
 		List<?> al = new ArrayList<>();
@@ -66,8 +89,7 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public ResponseEntity<List<?>> getAllCustomersConnection(Customer customer) {
 		
-		//List<?> al = restTemplate.getForObject("http://172.174.113.233:9001/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
-		List<?> al = restTemplate.getForObject("http://localhost:8200/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
+		List<?> al = restTemplate.getForObject("http://172.174.113.233:9001/facility/the-facility/"+customer.getFacilityId(), ArrayList.class);
 		logger.info("{} ", al);
 		
 		return new ResponseEntity<List<?>>(al, new HttpHeaders(), HttpStatus.OK);
@@ -148,21 +170,6 @@ public class CustomerServiceImpl implements CustomerService{
 		return new ResponseEntity<List<Customer>>(filteredVals, new HttpHeaders(), HttpStatus.OK);
 	}
 
-	//Method for Kafka
-	public void sendMessage(Claim claim) {
-		System.out.println("claim from service="+claim.toString());
-		//create message
-		Message<Claim> message = MessageBuilder
-				.withPayload(claim)
-				.setHeader(KafkaHeaders.TOPIC, newTopic.name())
-				.build();
-		System.out.println("this is service message" +message.toString());
-		kafkaTemplate.send(message);
-		
-	}
-	
-	
-	
 	
 	
 	
