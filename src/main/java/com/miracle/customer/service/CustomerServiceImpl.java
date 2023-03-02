@@ -54,8 +54,10 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public ResponseEntity<List<Customer>> getAllCustomers() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);		
 		List<Customer> list = customerRepository.findAll();
-		return new ResponseEntity<List<Customer>>(list, new HttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<>(list, headers, HttpStatus.OK);
 	}
 	
 	//filter for customer
